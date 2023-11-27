@@ -1,5 +1,7 @@
 package Analizador;
 
+/*  Juan Esteban Carrillo Garcia - María Fernanda Pérez Hernández */
+
 public enum Tokens {
     Linea,
     Comillas,

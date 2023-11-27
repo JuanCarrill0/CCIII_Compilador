@@ -31,8 +31,6 @@ espacio=[ ,\t,\r,\n]+
 
 /* Comillas */
 ( "\"" ) {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
-/* Simples */
-( "\'" ) {return new Symbol(sym.Comillas_s, yychar, yyline, yytext());}
 /* Backslash */
 ( "\\" ) {return new Symbol(sym.Back, yychar, yyline, yytext());}
 
@@ -149,11 +147,6 @@ espacio=[ ,\t,\r,\n]+
 ( "{" ) {return new Symbol(sym.Llave_a, yychar, yyline, yytext());}
 /* Llave de cierre */
 ( "}" ) {return new Symbol(sym.Llave_c, yychar, yyline, yytext());}
-
-/* Corchete de apertura */
-( "[" ) {return new Symbol(sym.Corchete_a, yychar, yyline, yytext());}
-/* Corchete de cierre */
-( "]" ) {return new Symbol(sym.Corchete_c, yychar, yyline, yytext());}
 
 /* Marcador de importación */
 ( #include ) {return new Symbol(sym.Include, yychar, yyline, yytext());}

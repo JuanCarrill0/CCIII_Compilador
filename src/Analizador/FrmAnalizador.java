@@ -75,6 +75,11 @@ public class FrmAnalizador extends javax.swing.JFrame {
 
         Resultado.setColumns(20);
         Resultado.setRows(5);
+        Resultado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ResultadoKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(Resultado);
 
         btnArchivo.setBackground(new java.awt.Color(226, 217, 194));
@@ -228,15 +233,22 @@ public class FrmAnalizador extends javax.swing.JFrame {
         btnGenIntermedio.setBackground(new java.awt.Color(226, 217, 194));
         btnGenIntermedio.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnGenIntermedio.setText("Intermedio");
+        btnGenIntermedio.setEnabled(false);
         btnGenIntermedio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenIntermedioActionPerformed(evt);
+            }
+        });
+        btnGenIntermedio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnGenIntermedioKeyTyped(evt);
             }
         });
 
         btnGenEnsamblador.setBackground(new java.awt.Color(226, 217, 194));
         btnGenEnsamblador.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnGenEnsamblador.setText("Ensamblador");
+        btnGenEnsamblador.setEnabled(false);
         btnGenEnsamblador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenEnsambladorActionPerformed(evt);
@@ -246,6 +258,7 @@ public class FrmAnalizador extends javax.swing.JFrame {
         btnGenObjeto.setBackground(new java.awt.Color(226, 217, 194));
         btnGenObjeto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnGenObjeto.setText("Objeto");
+        btnGenObjeto.setEnabled(false);
         btnGenObjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenObjetoActionPerformed(evt);
@@ -255,6 +268,7 @@ public class FrmAnalizador extends javax.swing.JFrame {
         btnGenEjecutable.setBackground(new java.awt.Color(226, 217, 194));
         btnGenEjecutable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnGenEjecutable.setText("Ejecutable");
+        btnGenEjecutable.setEnabled(false);
         btnGenEjecutable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenEjecutableActionPerformed(evt);
@@ -264,6 +278,7 @@ public class FrmAnalizador extends javax.swing.JFrame {
         btnEjecutar.setBackground(new java.awt.Color(226, 217, 194));
         btnEjecutar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnEjecutar.setText("Ejecutar");
+        btnEjecutar.setEnabled(false);
         btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEjecutarActionPerformed(evt);
@@ -322,14 +337,11 @@ public class FrmAnalizador extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel2))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(115, 115, 115)
-                                        .addComponent(jLabel3)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addComponent(jLabel3))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
@@ -658,6 +670,7 @@ public class FrmAnalizador extends javax.swing.JFrame {
             //Si el analizado sintactico se ejecuta orrectamente coloca el siguiente texto
             txtAnalizarSin.setText("Analisis realizado correctamente");
             txtAnalizarSin.setForeground(new Color(25, 111, 61));
+            btnGenIntermedio.setEnabled(true);
         } catch (Exception ex) {
             //Si el analizado sintactico fallta se coloca el siguiente texto
             Symbol sym = s.getS();
@@ -711,7 +724,9 @@ public class FrmAnalizador extends javax.swing.JFrame {
             String[] array = { "cmd", "/C", "start", 
             "1_Intermedio.bat" };
             Runtime.getRuntime().exec(array);
-            System.out.println("1. Creación de Archivo intermedio.");
+            //System.out.println("1. Creación de Archivo intermedio.");
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + "\n1. Creación de Archivo intermedio.");txtAnalizarSin.setText(txtAnalizarSin.getText() + "\n1. Creación de Archivo intermedio.");
+            btnGenEnsamblador.setEnabled(true);
         } catch (IOException ex) {
             Logger.getLogger(FrmAnalizador.class.getName()).log(Level.SEVERE, null, ex);
         }      
@@ -738,6 +753,8 @@ public class FrmAnalizador extends javax.swing.JFrame {
             "2_Ensamblador.bat" };
             Runtime.getRuntime().exec(array);
             System.out.println("2. Creación de Ensamblador.");
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + "\n2. Creación de Ensamblador.");
+            btnGenObjeto.setEnabled(true);
         } catch (IOException ex) {
             Logger.getLogger(FrmAnalizador.class.getName()).log(Level.SEVERE, null, ex);
         }  
@@ -750,6 +767,8 @@ public class FrmAnalizador extends javax.swing.JFrame {
             "3_Objeto.bat" };
             Runtime.getRuntime().exec(array);
             System.out.println("3. Creación de Objetos.");
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + "\n3. Creación de Objetos.");
+            btnGenEjecutable.setEnabled(true);
         } catch (IOException ex) {
             Logger.getLogger(FrmAnalizador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -763,12 +782,26 @@ public class FrmAnalizador extends javax.swing.JFrame {
             "4_Ejecutable.bat" };
             Runtime.getRuntime().exec(array);
             System.out.println("4. Creación de Ejecutable.");
+            txtAnalizarSin.setText(txtAnalizarSin.getText() + "\n4. Creación de Ejecutable.");
+            btnEjecutar.setEnabled(true);
         } catch (IOException ex) {
             Logger.getLogger(FrmAnalizador.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
     }//GEN-LAST:event_btnGenEjecutableActionPerformed
 
+    private void btnGenIntermedioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnGenIntermedioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGenIntermedioKeyTyped
+
+    private void ResultadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ResultadoKeyTyped
+        btnGenIntermedio.setEnabled(false);
+        btnGenEnsamblador.setEnabled(false);
+        btnGenObjeto.setEnabled(false);
+        btnGenEjecutable.setEnabled(false);
+        btnEjecutar.setEnabled(false);
+    }//GEN-LAST:event_ResultadoKeyTyped
+    
     /**
      * @param args the command line arguments
      */
